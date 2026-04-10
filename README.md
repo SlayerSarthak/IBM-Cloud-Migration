@@ -5,9 +5,11 @@ This repo. is used Migration of the Classic Infra. to the VPC for the IBM Cloud.
 
 Replace all placeholder values:
 
-
-SOURCE = {
+SOURCE = 
+{
+    
     "ubuntu_vm_ip": "YOUR_LINUX_SOURCE_IP",
+ 
     "windows_vm1_ip": "YOUR_WINDOWS_VM1_IP",
     "windows_vm2_ip": "YOUR_WINDOWS_VM2_IP",
 
@@ -20,6 +22,7 @@ SOURCE = {
     "app_path_linux": "/var/www/html",
     "app_path_windows": "C:\\inetpub\\wwwroot"
 }
+
 2️⃣ IBM Cloud Credentials
 
 Replace with your IBM Cloud account details:
