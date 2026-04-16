@@ -1,0 +1,115 @@
+{
+  "account": "acct_demo_001",
+
+  "resources": {
+    "compute": [
+      {
+        "id": "vm_app_01",
+        "device_name": "app-server-1",
+        "type": "vsi",
+        "cpu": 2,
+        "memory_gb": 4,
+        "operating_system": "CentOS Stream 9",
+        "network_ids": ["vlan_app"],
+        "storage": [
+          { "disk_id": "disk_app1", "capacity_gb": 50 }
+        ],
+        "role": "application"
+      },
+      {
+        "id": "vm_db_01",
+        "device_name": "db-server-1",
+        "type": "vsi",
+        "cpu": 4,
+        "memory_gb": 16,
+        "operating_system": "Ubuntu 20.04",
+        "network_ids": ["vlan_db"],
+        "storage": [
+          { "disk_id": "disk_db1", "capacity_gb": 200 }
+        ],
+        "role": "database"
+      }
+    ],
+
+    "bare_metal": [
+      {
+        "id": "bm_01",
+        "device_name": "bm-server-1",
+        "cpu": 8,
+        "memory_gb": 32,
+        "operating_system": "CentOS 7",
+        "network_ids": ["vlan_app"],
+        "storage": [
+          { "disk_id": "disk_bm1", "capacity_gb": 500 }
+        ]
+      }
+    ],
+
+    "network": {
+      "vlans": [
+        {
+          "id": "vlan_app",
+          "cidr": "192.168.1.0/24",
+          "type": "private"
+        },
+        {
+          "id": "vlan_db",
+          "cidr": "192.168.2.0/24",
+          "type": "private"
+        }
+      ],
+
+      "subnets": [
+        {
+          "id": "subnet_app",
+          "cidr": "192.168.1.0/24",
+          "linked_vlan": "vlan_app"
+        },
+        {
+          "id": "subnet_db",
+          "cidr": "192.168.2.0/24",
+          "linked_vlan": "vlan_db"
+        }
+      ]
+    },
+
+    "storage": {
+      "volumes": [
+        {
+          "id": "vol_app",
+          "size_gb": 50,
+          "attached_to": "vm_app_01"
+        },
+        {
+          "id": "vol_db",
+          "size_gb": 200,
+          "attached_to": "vm_db_01"
+        }
+      ]
+    },
+
+    "security": {
+      "security_groups": [
+        {
+          "id": "sg_app",
+          "rules": [
+            { "port": 80, "protocol": "tcp" },
+            { "port": 443, "protocol": "tcp" }
+          ]
+        },
+        {
+          "id": "sg_db",
+          "rules": [
+            { "port": 3306, "protocol": "tcp" }
+          ]
+        }
+      ]
+    },
+
+    "dependencies": {
+      "app_db_mapping": {
+        "app-server-1": "db-server-1"
+      }
+    }
+  }
+}
