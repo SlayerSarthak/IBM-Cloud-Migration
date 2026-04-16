@@ -113,3 +113,24 @@
     }
   }
 }
+"security": {
+  "firewalls": [
+    {
+      "name": "fw_app",
+      "rules": [
+        {
+          "direction": "inbound",
+          "port": 80,
+          "protocol": "tcp",
+          "source": "0.0.0.0/0"
+        },
+        {
+          "direction": "inbound",
+          "port": 3306,
+          "protocol": "tcp",
+          "source": "192.168.1.0/24"
+        }
+      ]
+    }
+  ]
+}
