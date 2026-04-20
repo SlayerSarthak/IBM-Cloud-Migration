@@ -19,3 +19,11 @@ variable "security_groups" {
     }))
   }))
 }
+
+variable "input_json_path" {
+  default = "../data/input.json"
+}
+
+locals {
+  parsed_config = jsondecode(file(var.input_json_path))
+}

@@ -23,3 +23,10 @@ module "vsi" {
 
   security_group_ids = module.security.security_group_ids
 }
+
+module "storage" {
+  source        = "./modules/storage"
+  iscsi_servers = local.parsed_config.iscsi_storage
+  vpc_id        = module.vpc.vpc_id
+  subnet_id     = module.subnet.subnet_id
+}

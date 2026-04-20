@@ -13,3 +13,7 @@ output "security_group_ids" {
 output "vsi_names" {
   value = [for vm in var.vsi_instances : vm.name]
 }
+
+output "iscsi_targets" {
+  value = module.storage.iscsi_endpoints
+}
